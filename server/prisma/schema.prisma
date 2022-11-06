@@ -6,17 +6,18 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id             String @id @default(uuid())
+  id             String  @id @default(uuid())
   name           String
-  email          String @unique
-  githubId       String @unique
-  githubUsername String @unique
+  email          String? @unique
+  githubId       String  @unique
+  githubUsername String  @unique
   profilePicture String
+  url            String  @unique
 
   words Word[]
 
@@ -28,8 +29,8 @@ model Word {
   word        String
   description String
 
-  createdAt DateTime @default(now())
-
   user      User   @relation(fields: [createdBy], references: [id])
   createdBy String
+
+  createdAt DateTime @default(now())
 }

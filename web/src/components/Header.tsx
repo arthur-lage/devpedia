@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { SignInButton } from "./SignInButton";
+import { useAuth } from "../hooks/useAuth";
 
 export function Header() {
+  const { currentUser, logout } = useAuth();
+
   return (
     <header className="px-20 py-5 border-b-2 border-b-[rgba(0,0,0,0.2)] flex items-center justify-between">
       <Link
@@ -31,6 +35,18 @@ export function Header() {
             <Link className="header-link" href="/about">
               About
             </Link>
+          </li>
+          <li>
+            {currentUser ? (
+              <div>
+                <p>Signed in as: {currentUser.name}</p>
+                <button onClick={logout}>Logout</button>
+              </div>
+            ) : (
+              <SignInButton inApp={true} href="/login">
+                Sign In
+              </SignInButton>
+            )}
           </li>
         </ul>
       </nav>
