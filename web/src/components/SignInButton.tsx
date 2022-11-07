@@ -1,19 +1,19 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { LinkHTMLAttributes, ReactNode } from "react";
 
-interface SignInButtonProps {
+interface SignInButtonProps extends LinkHTMLAttributes<HTMLAnchorElement> {
   href: string;
   inApp: boolean;
   children: ReactNode
 }
 
-export function SignInButton({ inApp, href, children }: SignInButtonProps) {
+export function SignInButton({ inApp, href, children, ...rest }: SignInButtonProps) {
   return (
     <>
       {inApp ? (
-        <Link href={href}>{children}</Link>
+        <Link {...rest} href={href}>{children}</Link>
       ) : (
-        <a href={href}>{children}</a>
+        <a {...rest} href={href}>{children}</a>
       )}
     </>
   );

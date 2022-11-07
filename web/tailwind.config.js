@@ -12,8 +12,8 @@ module.exports = {
       colors: {
         "pinkish-red": {
           "900": "#D81E5B",
-          "100": "#FFCFDF",
-          "200": "#FFC0CB"
+          "100": "#ffebf2",
+          "200": "#ffd1d8"
         }
       }
     },

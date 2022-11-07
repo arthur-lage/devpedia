@@ -11,20 +11,20 @@ export function Hero() {
 
       <div className="flex items-center gap-3">
         <Link
-          className="transition-all duration-150 flex items-center border-2 border-pinkish-red-900 text-pinkish-red-900 gap-3 text-lg text-lato font-medium bg-pinkish-red-100 hover:bg-pinkish-red-200 rounded-md p-4 cursor-pointer"
+          className="transition-all duration-150 flex items-center border-2 border-pinkish-red-900 text-pinkish-red-900 gap-3 text-lg text-lato font-medium bg-pinkish-red-100 hover:bg-pinkish-red-200 rounded-md px-4 py-2 cursor-pointer"
           href="/search"
         >
-          <MagnifyingGlass weight="bold" className="text-4xl text-pinkish-red-900" />
-          Search for terms
+          <MagnifyingGlass weight="bold" className="text-3xl text-pinkish-red-900" />
+          Search for words
         </Link>
 
         <a
           rel="noreferrer"
           target={"_blank"}
-          className="border-2 border-zinc-500 transition-all duration-150 flex items-center gap-3 text-white text-lg text-lato font-medium bg-zinc-900 hover:bg-zinc-800 rounded-md p-4 cursor-pointer"
+          className="border-2 border-zinc-500 transition-all duration-150 flex items-center gap-3 text-white text-lg text-lato font-medium bg-zinc-900 hover:bg-zinc-800 rounded-md px-4 py-2 cursor-pointer"
           href="https://github.com/arthur-lage/devpedia"
         >
-          <GithubLogo className="text-zinc-600 text-4xl" />
+          <GithubLogo className="text-zinc-600 text-3xl" />
           Project on GitHub
         </a>
       </div>
