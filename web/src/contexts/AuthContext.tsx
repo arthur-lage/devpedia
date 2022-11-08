@@ -9,6 +9,8 @@ export interface AuthContextProps {
   setAccessToken: (newAccessToken: string) => void;
   logout: () => void;
   currentUser: any;
+  setIsLoadingUser: (state: boolean) => void;
+  isLoadingUser: boolean;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -21,6 +23,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [code, setCode] = useState<string | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
 
   function logout() {
     setAccessToken(null);
@@ -54,13 +57,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [code]);
 
   async function fetchUserData() {
-    const res = await api.get("/me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    setIsLoadingUser(true);
 
-    setCurrentUser(res.data.user);
+    try {
+      const res = await api.get("/me", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      setCurrentUser(res.data.user);
+    } catch (err: any) {
+      console.error(err);
+    } finally {
+      setIsLoadingUser(false);
+    }
   }
 
   useEffect(() => {
@@ -77,6 +88,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     logout,
     fetchUserData,
     currentUser,
+    isLoadingUser,
+    setIsLoadingUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
