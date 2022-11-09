@@ -4,6 +4,7 @@ import { Hero } from "../components/Hero";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../hooks/useAuth";
+import Head from "next/head";
 
 export default function Home() {
   const router = useRouter();
@@ -19,14 +20,19 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="flex flex-col">
-      <Header />
+    <>
+      <Head>
+        <title>Home - Devpedia</title>
+      </Head>
+      <div className="flex flex-col">
+        <Header />
 
-      <main className="my-16">
-        <Hero />
-      </main>
+        <main className="my-16">
+          <Hero />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

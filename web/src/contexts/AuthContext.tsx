@@ -32,24 +32,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.setItem("devpedia.accessToken", JSON.stringify(null));
   }
 
+  function handleChangeAccessToken(token: string | null) {
+    api.defaults.headers.common["Authorization"] = "Bearer " + token;
+    localStorage.setItem("devpedia.accessToken", JSON.stringify(token));
+    setAccessToken(token);
+  }
+
   useEffect(() => {
     async function authenticateUser() {
-      if (!code) return;
+      if (localStorage.getItem("my_todos:token") !== null) {
+      }
 
       try {
+        setIsLoadingUser(true);
+
         const res = await api.post("/users", {
           code: code,
         });
 
-        api.defaults.headers.common["Authorization"] =
-          "Bearer " + res.data.token;
-        localStorage.setItem(
-          "devpedia.accessToken",
-          JSON.stringify(res.data.token)
-        );
-        setAccessToken(res.data.token);
+        handleChangeAccessToken(res.data.token)
       } catch (err: any) {
         console.error(err);
+      } finally {
+        setIsLoadingUser(false);
       }
     }
 
